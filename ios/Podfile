@@ -23,4 +23,5 @@ target 'RNFirebaseStarter' do
   
   pod 'Fabric', '~> 1.7.6'
   pod 'Crashlytics', '~> 3.10.1'
+
 end

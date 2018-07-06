@@ -2,20 +2,30 @@ import React from 'react';
 import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
 
 import firebase from 'react-native-firebase';
-
+import ScheduleView from './acc/scheduleview.js';
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
       // firebase things?
+      login:false,
     };
   }
 
   componentDidMount() {
     // firebase things?
+    firebase.auth().signInAnonymouslyAndRetrieveData().then((user)=>{
+      this.setState({login:true});
+      // alert(JSON.stringify(user));
+    });
   }
 
   render() {
+
+    if(this.state.login){
+      return <ScheduleView department="BME" year="III" day="1"/>;
+    }
+
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -23,6 +33,7 @@ export default class App extends React.Component {
         <Text style={styles.welcome}>
           Welcome to the React Native{'\n'}Firebase starter project!
         </Text>
+        <Text> {this.state.login ? "True" :"False"} </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
         </Text>
